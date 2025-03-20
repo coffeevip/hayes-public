@@ -3,28 +3,30 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main
-      - master
+      - master  # 当 master 分支有推送时触发部署
+  workflow_dispatch: # 允许手动触发部署
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          
+
       - name: Install Dependencies
         run: npm install
-        
+
       - name: Build
         run: npm run build
-        
+
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist 
+          folder: dist # 部署 dist 文件夹下的内容
+          branch: gh-pages # 部署到 gh-pages 分支
