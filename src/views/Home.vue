@@ -1,1 +1,1 @@
-﻿<template><div>Welcome to Torres Martinez种植管理系统</div></template>
+﻿<template><div class="home">Welcome to Torres Martinez种植管理系统</div></template><script lang="ts">import { defineComponent } from "vue"; export default defineComponent({ name: "Home" });</script><style scoped>.home { padding: 20px; font-size: 24px; }</style>
